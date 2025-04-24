@@ -20,15 +20,28 @@ bluetooth_socket.connect((bluetooth_addr,bluetooth_port))
 
 try:
   while True:
+    
     recievedData_Temperature = bluetooth_socket.recv(1)
-    temperature = int.from_bytes(recievedData_Temperature, byteorder='big')
-
+    #TODO: Is this the proper way to recieve these values?
+    recievedData_Humidity    = bluetooth_socket.recv(2)
+    recievedData_WaterWeight = bluetooth_socket.recv(3)
+    
+    temperature = int.from_bytes(recievedData_Temperature,     byteorder='big')
+    #TODO: Same as above?
+    humidity    = int.from_bytes(recievedData_Humidity,        byteorder='big')
+    waterWeight = int.from_bytes(recievedData_WaterWeight,     byteorder='big')
     
     print("Current Temperature: %d" % temperaure)
-
+    print("Current Humditity: %d" % humidity)
+    print("Current Water Weight (grams): %d" % waterWeight)
 
     thingspeak_field1 = {"field1": temperature}
+    thingspeak_field2 = {"field1": humidity}
+    thingspeak_field3 = {"field1": waterWeight}
+    
     ts.update(thingspeak_field1) #update Thingspeak
+    ts.update(thingspeak_field2) #update Thingspeak
+    ts.update(thingspeak_field3) #update Thingspeak
 
 except KeyboardInterrupt:
     print ("ERRROR; Keyboard interrupt detected: Shutting down")
