@@ -20,8 +20,10 @@ bluetooth_socket.connect((bluetooth_addr,bluetooth_port))
 
 try:
   while True:
-    recieved_data = bluetooth_socket.recv(1)
-    temperature = int.from_bytes(recieved_data, byteorder='big')
+    recievedData_Temperature = bluetooth_socket.recv(1)
+    temperature = int.from_bytes(recievedData_Temperature, byteorder='big')
+
+    
     print("Current Temperature: %d" % temperaure)
 
 
