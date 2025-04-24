@@ -6,11 +6,11 @@ bluetooth_addr = "Our Address"
 bluetooth_port = 1 #RFCOMM channel 1
 
 #Thingspeak Information
-channel_ID = 2913073
-key = "S0RJOAXCWG559TA9"
+channel_ID = 2913073 #channel ID from thingspeak
+key = "S0RJOAXCWG559TA9" #thingspeak API Key
 url = 'https://api.thingspeak.com/update'  #default url to update the thingspeak server
 
-#Init thingspeak channel
+#Init. thingspeak channel
 ts = thingspeak.Channel(channel_ID, key, url)
 
 #Create a bluetooth socket
